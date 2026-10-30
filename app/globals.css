@@ -246,7 +246,7 @@ h3 {
 .hero-bg-image,
 .experience-bg-image,
 .newsletter-bg-image {
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .hero-overlay {
@@ -3469,5 +3469,749 @@ h3 {
 @media (max-width: 600px) {
   .newsletter-final-legal {
     gap: 12px 16px;
+  }
+}
+
+
+/* =========================================================
+   SOMSOA MOBILE REDESIGN — HORIZONTAL BROWSING
+   Append this file's contents to the END of app/globals.css.
+   Desktop styles are intentionally left untouched.
+   ========================================================= */
+
+@media (max-width: 768px) {
+  html {
+    scroll-padding-top: 72px;
+  }
+
+  /* Keep the layout airy without making every section excessively tall. */
+  .container,
+  .site-header-inner,
+  .hero-content {
+    width: calc(100% - 40px);
+  }
+
+  .hero {
+    min-height: min(690px, 88svh);
+  }
+
+  .hero-content {
+    padding: 112px 0 56px;
+  }
+
+  .hero-copy {
+    max-width: 440px;
+  }
+
+  .hero .eyebrow {
+    margin-bottom: 18px;
+    font-size: 9px;
+    letter-spacing: .18em;
+  }
+
+  .hero h1 {
+    margin-bottom: 22px;
+    font-size: clamp(3.4rem, 14vw, 5rem);
+    line-height: .92;
+  }
+
+  .hero-copy > p {
+    max-width: 340px;
+    margin-bottom: 26px;
+    font-size: .92rem;
+    line-height: 1.65;
+  }
+
+  .hero-actions {
+    max-width: 360px;
+    gap: 10px;
+  }
+
+  .hero-actions .btn {
+    min-height: 49px;
+    padding-inline: 16px;
+    font-size: .62rem;
+  }
+
+  /* COLLECTION: horizontal swipe rail, with a preview of the next shade. */
+  .collection {
+    padding: 68px 0 64px;
+  }
+
+  .collection-intro {
+    margin-bottom: 28px;
+  }
+
+  .collection-eyebrow,
+  .section-eyebrow {
+    margin-bottom: 13px;
+    font-size: .59rem;
+  }
+
+  .collection-intro h2,
+  .how-it-works-heading h2,
+  .reviews-title {
+    font-size: clamp(2.65rem, 11vw, 4rem);
+    line-height: .96;
+    letter-spacing: -.055em;
+  }
+
+  .collection-description {
+    max-width: 290px;
+    margin-top: 16px;
+    font-size: .85rem;
+    line-height: 1.65;
+  }
+
+  .collection-grid {
+    display: flex;
+    gap: 14px;
+    width: calc(100% + 20px);
+    margin-right: -20px;
+    padding: 0 20px 14px 0;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .collection-grid::-webkit-scrollbar,
+  .experience-features::-webkit-scrollbar,
+  .how-it-works-steps::-webkit-scrollbar,
+  .standard-principles::-webkit-scrollbar,
+  .reviews-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .collection-product {
+    flex: 0 0 82%;
+    min-width: 0;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .collection-card {
+    height: clamp(300px, 88vw, 390px);
+    border-radius: 13px;
+  }
+
+  .collection-card-content {
+    inset: auto 20px 20px;
+  }
+
+  .collection-card h3 {
+    font-size: 1.8rem;
+  }
+
+  .product-meta {
+    padding: 13px 2px 0;
+  }
+
+  .product-meta-price {
+    font-size: 21px;
+  }
+
+  .product-select-trigger {
+    margin-top: 12px;
+    min-height: 40px;
+  }
+
+  .collection-stock {
+    margin-top: 10px;
+    padding-top: 10px;
+  }
+
+  /* EXPERIENCE: turn the stacked feature list into swipeable feature cards. */
+  .experience {
+    min-height: auto;
+    padding: 76px 0 62px;
+  }
+
+  .experience-container {
+    display: block;
+    width: calc(100% - 40px);
+  }
+
+  .experience-copy {
+    margin-bottom: 30px;
+  }
+
+  .experience-copy h2 {
+    margin-bottom: 18px;
+    font-size: clamp(2.7rem, 10.5vw, 4.2rem);
+    line-height: .95;
+  }
+
+  .experience-description {
+    max-width: 350px;
+    font-size: .88rem;
+    line-height: 1.7;
+  }
+
+  .experience-features {
+    display: flex;
+    gap: 12px;
+    width: calc(100% + 20px);
+    margin-right: -20px;
+    padding: 0 20px 12px 0;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    border-top: 0;
+    scrollbar-width: none;
+  }
+
+  .experience-feature {
+    display: flex;
+    flex: 0 0 78%;
+    flex-direction: column;
+    gap: 18px;
+    min-height: 230px;
+    padding: 22px 20px;
+    border: 1px solid rgba(244, 241, 233, .24);
+    border-radius: 13px;
+    background: rgba(10, 10, 10, .24);
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .feature-number {
+    font-size: .62rem;
+  }
+
+  .feature-text h3 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+  }
+
+  .feature-text p {
+    font-size: .8rem;
+    line-height: 1.65;
+  }
+
+  /* HOW IT WORKS: retain the technology showcase, then swipe through steps. */
+  .how-it-works {
+    padding: 70px 0 76px;
+  }
+
+  .how-it-works-heading {
+    display: block;
+    margin-bottom: 32px;
+  }
+
+  .how-it-works-title h2 br {
+    display: none;
+  }
+
+  .how-it-works-description {
+    max-width: 330px;
+    margin-top: 16px;
+    font-size: .84rem;
+    line-height: 1.7;
+  }
+
+  .technology-showcase {
+    width: 100%;
+    padding: 9px 9px 0;
+  }
+
+  .technology-showcase-header {
+    padding: 16px 11px;
+  }
+
+  .technology-showcase-header h3 {
+    font-size: 1.35rem;
+  }
+
+  .technology-showcase-footer {
+    padding: 16px 11px 18px;
+  }
+
+  .how-it-works-steps {
+    display: flex;
+    gap: 12px;
+    width: calc(100% + 20px);
+    margin: 30px -20px 0 0;
+    padding: 0 20px 14px 0;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    border: 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .how-step {
+    display: flex;
+    flex: 0 0 80%;
+    flex-direction: column;
+    min-width: 0;
+    padding: 20px;
+    border: 1px solid rgba(25, 25, 24, .13);
+    border-radius: 13px;
+    background: var(--cream);
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .how-step + .how-step {
+    border: 1px solid rgba(25, 25, 24, .13);
+  }
+
+  .how-step-top {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .how-step-label {
+    padding-top: 0;
+    font-size: .57rem;
+  }
+
+  .how-step-image-wrap {
+    width: 82px;
+  }
+
+  .how-step-image {
+    max-width: 82px;
+  }
+
+  .how-step-content {
+    max-width: 100%;
+    margin: 22px 0 0;
+  }
+
+  .how-step-content h3 {
+    margin-bottom: 10px;
+    font-size: 1.45rem;
+    line-height: 1.05;
+  }
+
+  .how-step-content p {
+    font-size: .79rem;
+    line-height: 1.65;
+  }
+
+  /* STANDARD: keep the editorial block, but make the three principles swipeable. */
+  .standard-hero {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .standard-editorial {
+    min-height: 0;
+    padding: 64px 22px 56px;
+  }
+
+  .standard-eyebrow {
+    margin-bottom: 20px;
+    font-size: 10px;
+  }
+
+  .standard-title {
+    font-size: clamp(3.5rem, 13vw, 5rem);
+    line-height: .96;
+    letter-spacing: -.055em;
+  }
+
+  .standard-rule {
+    margin: 27px 0 23px;
+  }
+
+  .standard-intro {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .standard-link {
+    margin-top: 24px;
+  }
+
+  .standard-visual {
+    min-height: 0;
+    height: 78vw;
+    max-height: 430px;
+  }
+
+  .standard-principles {
+    display: flex;
+    gap: 12px;
+    min-height: 0;
+    padding: 16px 20px 24px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .standard-principle {
+    flex: 0 0 82%;
+    min-height: 350px;
+    border: 1px solid rgba(30, 30, 30, .12);
+    border-radius: 13px;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .standard-principle + .standard-principle {
+    border: 1px solid rgba(30, 30, 30, .12);
+  }
+
+  .principle-content {
+    padding: 28px 22px;
+  }
+
+  .principle-copy h3 {
+    margin-top: 20px;
+    font-size: 31px;
+  }
+
+  .principle-copy p {
+    margin-top: 20px;
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  /* REVIEWS: horizontal review rail instead of a long vertical stack. */
+  .reviews {
+    padding: 70px 0 76px;
+  }
+
+  .reviews-inner {
+    width: calc(100% - 40px);
+  }
+
+  .reviews-header {
+    display: block;
+    margin-bottom: 28px;
+  }
+
+  .reviews-eyebrow {
+    margin-bottom: 15px;
+  }
+
+  .reviews-intro {
+    max-width: 320px;
+    margin-top: 16px;
+    font-size: .82rem;
+    line-height: 1.65;
+  }
+
+  .reviews-grid {
+    display: flex;
+    gap: 12px;
+    width: calc(100% + 20px);
+    margin-right: -20px;
+    padding: 0 20px 14px 0;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .reviews-grid .review-card {
+    flex: 0 0 84%;
+    padding: 25px 22px;
+    border-radius: 13px;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .reviews-grid .review-top {
+    margin-bottom: 20px;
+  }
+
+  .reviews-grid .review-card blockquote {
+    font-size: 1.35rem;
+    line-height: 1.2;
+  }
+
+  .reviews-grid .review-author {
+    margin-top: 22px;
+    padding-top: 18px;
+  }
+
+  /* Final call-to-action: reduce dead space on phones. */
+  .final-cta {
+    min-height: 0;
+    padding: 78px 22px 72px;
+  }
+
+  .final-cta-eyebrow {
+    margin-bottom: 25px;
+    font-size: 9px;
+    letter-spacing: .2em;
+  }
+
+  .final-cta-title {
+    font-size: clamp(3.5rem, 13vw, 5.1rem);
+  }
+
+  .final-cta-description {
+    margin-top: 24px;
+    font-size: 13px;
+    line-height: 1.75;
+  }
+
+  .final-cta-link {
+    margin-top: 26px;
+  }
+
+  .final-cta-inner::after {
+    margin-top: 42px;
+    font-size: 8px;
+    letter-spacing: .2em;
+  }
+
+  /* Newsletter/footer spacing. Preserve the existing form and handlers. */
+  .newsletter-final {
+    min-height: 0;
+  }
+
+  .newsletter-final-content {
+    min-height: 540px;
+    padding: 82px 22px 48px;
+  }
+
+  .newsletter-final-title {
+    font-size: clamp(3.4rem, 13vw, 5rem);
+  }
+
+  .newsletter-final-description {
+    margin-bottom: 28px;
+    font-size: 13px;
+  }
+
+  .newsletter-final-footer {
+    min-height: 0;
+    padding: 24px 0;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    min-height: min(650px, 86svh);
+  }
+
+  .hero-content {
+    padding-top: 104px;
+  }
+
+  .hero-actions .btn {
+    white-space: normal;
+  }
+
+  .collection-product {
+    flex-basis: 84%;
+  }
+
+  .experience-feature,
+  .how-step {
+    flex-basis: 82%;
+  }
+
+  .standard-principle {
+    flex-basis: 86%;
+  }
+
+  .reviews-grid .review-card {
+    flex-basis: 88%;
+  }
+
+  .newsletter-final-content {
+    min-height: 500px;
+  }
+}
+
+
+/* =========================================================
+   SOMSOA — MOBILE CAROUSEL PAGINATION
+   Custom progress dots for horizontal swipe sections.
+   ========================================================= */
+
+.carousel-pagination {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .carousel-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 100%;
+    margin: 10px auto 0;
+    padding: 0 12px;
+  }
+
+  .carousel-pagination__dot {
+    display: grid;
+    flex: 0 0 24px;
+    place-items: center;
+    width: 24px;
+    height: 28px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .carousel-pagination__dot::before {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(48, 41, 31, 0.28);
+    transition: width 240ms ease, background 240ms ease;
+  }
+
+  .carousel-pagination__dot.is-active::before {
+    width: 19px;
+    background: #30291f;
+  }
+
+  .carousel-pagination--dark .carousel-pagination__dot::before {
+    background: rgba(244, 241, 233, 0.42);
+  }
+
+  .carousel-pagination--dark
+    .carousel-pagination__dot.is-active::before {
+    background: #fff;
+  }
+
+  .carousel-pagination__dot:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: -2px;
+    border-radius: 50%;
+  }
+}
+/* ==========================================
+   SOMSOA — MOBILE TECHNOLOGY CAROUSEL
+========================================== */
+
+.technology-mobile-carousel {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  /* Hide the original desktop technology showcase on mobile */
+  .technology-showcase {
+    display: none;
+  }
+
+  /* Mobile carousel container */
+  .technology-mobile-carousel {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    overflow: visible;
+  }
+
+  /* Horizontal swipe track */
+  .technology-mobile-track {
+    display: flex;
+    align-items: stretch;
+    gap: 14px;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 4px 2px 12px;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 2px;
+    scroll-behavior: smooth;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .technology-mobile-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Individual technology cards */
+  .technology-mobile-card {
+    position: relative;
+    flex: 0 0 min(80vw, 360px);
+    min-width: 0;
+    align-self: flex-start;
+    overflow: hidden;
+    border-radius: 17px;
+    background: #eae5da;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    box-shadow: 0 10px 30px rgba(48, 41, 31, 0.06);
+  }
+
+  /* Card image */
+  .technology-mobile-card-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1122 / 1402;
+    overflow: hidden;
+    background: #eae5da;
+  }
+
+  .technology-mobile-card-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  /* Carousel pagination */
+  .technology-mobile-carousel .carousel-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin: 14px auto 0;
+    padding: 0;
+  }
+
+  .technology-mobile-carousel .carousel-pagination__dot {
+    flex: 0 0 24px;
+    width: 24px;
+    height: 24px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .technology-mobile-carousel .carousel-pagination__dot::before {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 100px;
+    background: rgba(48, 41, 31, 0.28);
+    transition: width 250ms ease, background 250ms ease;
+  }
+
+  .technology-mobile-carousel .carousel-pagination__dot.is-active::before {
+    width: 19px;
+    background: #30291f;
+  }
+
+  /* How it works spacing */
+  .how-it-works {
+    overflow: hidden;
+  }
+
+  .how-it-works-heading {
+    margin-bottom: 30px;
+    gap: 16px;
   }
 }

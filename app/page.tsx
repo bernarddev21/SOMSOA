@@ -3,6 +3,7 @@ import CartButton from "../components/CartButton";
 import ProductSelector from "../components/ProductSelector";
 import { PRODUCTS } from "../components/products";
 import Newsletter from "../components/home/Newsletter";
+import CarouselControls from "../components/ui/CarouselControls";
 
 export default function Home() {
   return (
@@ -323,6 +324,12 @@ export default function Home() {
 
     </div>
 
+
+    <CarouselControls
+      target=".collection-grid"
+      label="Collection"
+      tone="light"
+    />
   </div>
 
 </section>
@@ -435,6 +442,13 @@ export default function Home() {
 
           </div>
 
+
+          <CarouselControls
+            target=".experience-features"
+            label="Experience features"
+            tone="dark"
+          />
+
         </div>
 
       </section>
@@ -527,6 +541,75 @@ export default function Home() {
             </div>
 
           </div>
+
+          
+          {/* MOBILE TECHNOLOGY CAROUSEL */}
+          <div className="technology-mobile-carousel">
+
+            <div className="technology-mobile-track">
+
+              {/* CARD 01 — ENGINEERED COMFORT */}
+              <article className="technology-mobile-card">
+                <div className="technology-mobile-card-media">
+                  <Image
+                    src="/images/technology-card-1.png"
+                    alt="SOMSOA slipper construction"
+                    fill
+                    sizes="(max-width: 768px) 80vw, 360px"
+                  />
+                </div>
+              </article>
+
+              {/* CARD 02 — ADJUSTABLE WARMTH */}
+              <article className="technology-mobile-card">
+                <div className="technology-mobile-card-media">
+                  <Image
+                    src="/images/technology-card-2.png"
+                    alt="SOMSOA adjustable heating levels"
+                    fill
+                    sizes="(max-width: 768px) 80vw, 360px"
+                  />
+                </div>
+              </article>
+
+              {/* CARD 03 — RECHARGEABLE POWER */}
+              <article className="technology-mobile-card">
+                <div className="technology-mobile-card-media">
+                  <Image
+                    src="/images/technology-card-3.png"
+                    alt="SOMSOA rechargeable battery system"
+                    fill
+                    sizes="(max-width: 768px) 80vw, 360px"
+                  />
+                </div>
+              </article>
+
+              {/* CARD 04 — SIMPLE CONTROL */}
+              <article className="technology-mobile-card">
+                <div className="technology-mobile-card-media">
+                  <Image
+                    src="/images/technology-card-4.png"
+                    alt="SOMSOA battery controls and instructions"
+                    fill
+                    sizes="(max-width: 768px) 80vw, 360px"
+                  />
+                </div>
+              </article>
+
+            </div>
+
+            <CarouselControls
+              target=".technology-mobile-track"
+              label="Technology"
+              tone="light"
+              interval={5000}
+            />
+
+          </div>
+
+
+          {/* HOW IT WORKS STEPS */}
+
 
 
           {/* HOW IT WORKS STEPS */}
@@ -661,6 +744,13 @@ export default function Home() {
             </article>
 
           </div>
+
+
+          <CarouselControls
+            target=".how-it-works-steps"
+            label="How it works"
+            tone="light"
+          />
 
         </div>
 
@@ -870,6 +960,12 @@ export default function Home() {
 
         </div>
 
+        <CarouselControls
+          target=".standard-principles"
+          label="SOMSOA standard"
+          tone="light"
+        />
+
       </section>
 
 
@@ -912,7 +1008,7 @@ export default function Home() {
 
               <blockquote>
                 “The kind of comfort you don't realise you've been missing.
-                I've worn mine every evening since they arrived — my feet are
+                I've worn mine every evening since they arrived, my feet are
                 finally warm through winter.”
               </blockquote>
 
@@ -942,7 +1038,7 @@ export default function Home() {
               </div>
 
               <blockquote>
-                “Warm, incredibly comfortable and beautifully simple to use —
+                “Warm, incredibly comfortable and beautifully simple to use. GI
                 charged mine on Sunday and it lasted the whole week.”
               </blockquote>
 
@@ -973,7 +1069,7 @@ export default function Home() {
 
               <blockquote>
                 “They've quickly become the first thing I reach for in the
-                evening — even on our cold kitchen floor.”
+                evening, even on our cold kitchen floor.”
               </blockquote>
 
               <div className="review-author">
@@ -1021,6 +1117,13 @@ export default function Home() {
               </div>
             </article>
           </div>
+
+          <CarouselControls
+            target=".reviews-grid"
+            label="Customer reviews"
+            tone="light"
+          />
+
         </div>
       </section>
 
