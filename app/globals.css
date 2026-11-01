@@ -4215,3 +4215,275 @@ h3 {
     gap: 16px;
   }
 }
+/* Keep How It Works artwork perfectly circular */
+.how-step-image-wrap {
+  width: 150px;
+  height: 150px;
+  flex: 0 0 150px;
+}
+
+.how-step-image {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+  .how-step-image-wrap {
+    width: 82px;
+    height: 82px;
+    flex-basis: 82px;
+  }
+}
+/* Fill the Hero and Experience sections—remove unused black image space */
+.hero-bg-image,
+.experience-bg-image {
+  object-fit: cover;
+}
+
+/* Keep each photo focused on its subject on desktop */
+.hero-bg-image {
+  object-position: 68% center;
+}
+
+.experience-bg-image {
+  object-position: 76% center;
+}
+
+/* Mobile: retain the subjects while preserving text contrast */
+@media (max-width: 768px) {
+  .hero-bg-image {
+    object-position: 72% center;
+  }
+
+  .experience-bg-image {
+    object-position: 78% center;
+  }
+
+  .hero-overlay {
+    background:
+      linear-gradient(180deg, rgba(5, 6, 8, .60) 0%, rgba(5, 6, 8, .34) 55%, rgba(5, 6, 8, .76) 100%),
+      linear-gradient(90deg, rgba(5, 6, 8, .76), rgba(5, 6, 8, .18));
+  }
+
+  .experience-overlay {
+    background:
+      linear-gradient(180deg, rgba(7, 7, 7, .76) 0%, rgba(7, 7, 7, .38) 48%, rgba(7, 7, 7, .68) 100%),
+      linear-gradient(90deg, rgba(7, 7, 7, .62), rgba(7, 7, 7, .10));
+  }
+}
+/* =========================================================
+   SOMSOA — POLISHED FINISHING LAYER
+   Add at the END of globals.css
+   ========================================================= */
+
+/* Remove empty background space and keep each image well framed */
+.hero-bg-image,
+.experience-bg-image {
+  object-fit: cover;
+}
+
+.hero-bg-image {
+  object-position: 68% center;
+}
+
+.experience-bg-image {
+  object-position: 76% center;
+}
+
+/* More balanced desktop proportions */
+@media (min-width: 769px) {
+  .hero {
+    min-height: clamp(650px, 52vw, 820px);
+  }
+
+  .hero-copy {
+    max-width: 540px;
+  }
+
+  .hero h1 {
+    font-size: clamp(4rem, 5.7vw, 6.1rem);
+  }
+
+  .experience {
+    min-height: clamp(740px, 52vw, 840px);
+  }
+
+  .collection-card,
+  .review-card,
+  .technology-showcase {
+    transition:
+      transform .35s ease,
+      box-shadow .35s ease;
+  }
+
+  .collection-card:hover,
+  .review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 24px 55px rgba(23, 20, 15, .12);
+  }
+}
+
+/* Better keyboard usability */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #b5602f;
+  outline-offset: 4px;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+  }
+}
+
+/* =========================================================
+   MOBILE POLISH
+   ========================================================= */
+
+@media (max-width: 768px) {
+  /* Keep photographs full-bleed while protecting text readability */
+  .hero-bg-image {
+    object-position: 72% center;
+  }
+
+  .experience-bg-image {
+    object-position: 78% center;
+  }
+
+  .hero-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(5, 6, 8, .62) 0%,
+        rgba(5, 6, 8, .30) 54%,
+        rgba(5, 6, 8, .78) 100%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(5, 6, 8, .72),
+        rgba(5, 6, 8, .12)
+      );
+  }
+
+  .experience-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(7, 7, 7, .78) 0%,
+        rgba(7, 7, 7, .38) 48%,
+        rgba(7, 7, 7, .72) 100%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(7, 7, 7, .62),
+        rgba(7, 7, 7, .08)
+      );
+  }
+
+  /* Hero: clearer hierarchy and easier-to-tap calls to action */
+  .hero {
+    min-height: min(720px, 92svh);
+  }
+
+  .hero-content {
+    padding: 108px 0 58px;
+  }
+
+  .hero h1 {
+    font-size: clamp(3.15rem, 13vw, 4.25rem);
+    line-height: .94;
+  }
+
+  .hero-copy > p {
+    max-width: 315px;
+    font-size: .9rem;
+  }
+
+  .hero-actions {
+    width: 100%;
+    max-width: none;
+  }
+
+  .hero-actions .btn {
+    flex: 1 1 100%;
+    width: 100%;
+    min-height: 52px;
+  }
+
+  /* Make the first carousel card prominent, with a deliberate next-card preview */
+  .collection-product {
+    flex-basis: 86%;
+  }
+
+  .experience-feature {
+    flex-basis: 84%;
+    min-height: 248px;
+    padding: 24px 21px;
+  }
+
+  .how-step {
+    flex-basis: 84%;
+  }
+
+  .standard-principle {
+    flex-basis: 88%;
+  }
+
+  .reviews-grid .review-card {
+    flex-basis: 88%;
+  }
+
+  /* Cleaner mobile section rhythm */
+  .collection {
+    padding: 72px 0 68px;
+  }
+
+  .experience {
+    padding: 78px 0 68px;
+  }
+
+  .how-it-works {
+    padding: 76px 0 80px;
+  }
+
+  .reviews {
+    padding: 76px 0 80px;
+  }
+
+  /* Make carousel controls self-explanatory */
+  .carousel-pagination {
+    gap: 3px;
+    margin-top: 12px;
+  }
+
+  .carousel-pagination::after {
+    content: "Swipe";
+    margin-left: 9px;
+    color: rgba(48, 41, 31, .48);
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+
+  .carousel-pagination--dark::after {
+    color: rgba(244, 241, 233, .52);
+  }
+
+  /* Slightly more breathing room in card copy */
+  .how-step-content p,
+  .feature-text p,
+  .reviews-intro,
+  .collection-description {
+    line-height: 1.72;
+  }
+}
