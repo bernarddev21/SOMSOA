@@ -196,11 +196,7 @@ return (
       ))}
     </div>
 
-    <CarouselControls
-      target=".collection-grid"
-      label="Collection"
-      tone="light"
-    />
+
   </div>
 </section>
 
