@@ -1,10 +1,9 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
+import { getSupabaseAdmin } from "../../../lib/supabase-admin";
 
-import {
-  PRODUCTS,
-  SIZE_OPTIONS,
-} from "../../../components/products";
+import { SIZE_OPTIONS } from "../../../components/products";
+import { getStoreProductById } from "../../../lib/products-server";
 
 import type { SizeSystem } from "../../../components/products";
 
@@ -275,9 +274,10 @@ export async function POST(request: Request) {
     const origin = new URL(request.url).origin;
 
     const shippingLines: OrderLineForShipping[] = [];
+    let subtotalPence = 0;
 
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] =
-      body.items.map((item: unknown) => {
+      await Promise.all(body.items.map(async (item: unknown) => {
         if (typeof item !== "object" || item === null) {
           throw new Error("Invalid cart item.");
         }
@@ -314,13 +314,13 @@ export async function POST(request: Request) {
           throw new Error("Invalid size.");
         }
 
-        const product = PRODUCTS.find(
-          (product) => product.id === cartItem.productId
-        );
+        const product = await getStoreProductById(cartItem.productId);
 
         if (!product) {
           throw new Error("Invalid product.");
         }
+
+        subtotalPence += product.price * cartItem.quantity;
 
         shippingLines.push({
           sizeSystem: cartItem.sizeSystem,
@@ -334,12 +334,12 @@ export async function POST(request: Request) {
             unit_amount: product.price,
             product_data: {
               name: `${product.name} Heated Slippers`,
-              description: `${product.colour} · Size ${cartItem.size} (${cartItem.sizeSystem})`,
+              description: `${product.colour} · Size ${cartItem.size} (${cartItem.sizeSystem})${product.originalPrice ? ` · Sale price (was £${(product.originalPrice / 100).toFixed(2)})` : ""}`,
             },
           },
           quantity: cartItem.quantity,
         };
-      });
+      }));
 
     const destination: ShippingDestination =
       shippingRegion === "GB" ? "GB" : "INT";
@@ -416,6 +416,13 @@ export async function POST(request: Request) {
       shipping_region: shippingRegion,
       shipping_country: effectiveCountry,
     };
+    // Browser-generated identifiers are only attached when analytics consent exists.
+    if (typeof body.analyticsVisitorId === "string" && body.analyticsVisitorId.length <= 80) {
+      metadata.analytics_visitor_id = body.analyticsVisitorId;
+    }
+    if (typeof body.analyticsSessionId === "string" && body.analyticsSessionId.length <= 80) {
+      metadata.analytics_session_id = body.analyticsSessionId;
+    }
 
     if (shippingRegion === "GB") {
       const tracked24 = calculateShippingCost(
@@ -446,10 +453,35 @@ export async function POST(request: Request) {
       metadata.international_parcels = getParcelSummary(tracked48.parcels);
     }
 
+    let stripeDiscounts: Stripe.Checkout.SessionCreateParams.Discount[] | undefined;
+    let discountCode: string | null = null;
+    if (typeof body.discountCode === "string" && body.discountCode.trim()) {
+      const code = body.discountCode.trim().toUpperCase();
+      const admin = getSupabaseAdmin();
+      const { data: discount, error: discountError } = await admin
+        .from("discount_codes")
+        .select("code,discount_type,discount_value,minimum_order_pence,starts_at,ends_at,active,max_uses,used_count")
+        .eq("code", code)
+        .maybeSingle();
+      if (discountError) throw new Error("We could not validate that discount code.");
+      const now = Date.now();
+      const valid = discount && discount.active && subtotalPence >= discount.minimum_order_pence
+        && (!discount.starts_at || new Date(discount.starts_at).getTime() <= now)
+        && (!discount.ends_at || new Date(discount.ends_at).getTime() > now)
+        && (discount.max_uses == null || discount.used_count < discount.max_uses);
+      if (!valid) throw new Error("That discount code is invalid, expired, or does not meet its minimum spend.");
+      const coupon = await stripe.coupons.create(discount.discount_type === "percentage"
+        ? { percent_off: discount.discount_value, duration: "once", name: `SOMSOA ${code}` }
+        : { amount_off: Math.min(subtotalPence, discount.discount_value), currency: "gbp", duration: "once", name: `SOMSOA ${code}` });
+      stripeDiscounts = [{ coupon: coupon.id }];
+      discountCode = code;
+    }
+
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       locale: "en-GB",
       line_items: lineItems,
+      ...(stripeDiscounts ? { discounts: stripeDiscounts } : {}),
       billing_address_collection: "auto",
       shipping_address_collection: {
         allowed_countries:
@@ -459,7 +491,7 @@ export async function POST(request: Request) {
       success_url:
         `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/#collection`,
-      metadata,
+      metadata: { ...metadata, ...(discountCode ? { discount_code: discountCode } : {}) },
     });
 
     if (!session.url) {

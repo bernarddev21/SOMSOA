@@ -4,6 +4,8 @@ import "./globals.css";
 
 import { CartProvider } from "../components/CartProvider";
 import CartUI from "../components/CartUI";
+import AnalyticsTracker from "../components/AnalyticsTracker";
+import AnalyticsConsent from "../components/AnalyticsConsent";
 
 
 const serif = Cormorant_Garamond({
@@ -52,6 +54,8 @@ export default function RootLayout({
         <CartProvider>
           {children}
           <CartUI />
+          <AnalyticsTracker />
+          <AnalyticsConsent />
         </CartProvider>
       </body>
     </html>

@@ -3220,6 +3220,22 @@ h3 {
    ========================================================= */
 
 @media (max-width: 768px) {
+  /*
+     The product selector must have one vertical scroll surface on iOS.
+     The overlay scrolls; the drawer grows with its content. This avoids the
+     fixed-height nested scroller that Safari can bounce back to mid-gesture.
+  */
+  .product-drawer-overlay {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .product-drawer {
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+  }
+
   .product-meta {
     padding-top: 15px;
   }
@@ -4486,4 +4502,29 @@ button:focus-visible {
   .collection-description {
     line-height: 1.72;
   }
+}
+
+
+/* Quiet staff-only access link at the very bottom of the storefront. */
+.admin-access-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 14px clamp(20px, 5vw, 72px) 18px;
+  background: #f4f1e9;
+}
+
+.admin-access-footer a {
+  color: rgba(48, 41, 31, .42);
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+
+.admin-access-footer a:hover,
+.admin-access-footer a:focus-visible {
+  color: #30291f;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }

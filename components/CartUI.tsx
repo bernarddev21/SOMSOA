@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useCart } from "./CartProvider";
+import { trackCommerceEvent } from "@/lib/analytics-client";
+import PriceDisplay from "@/components/PriceDisplay";
 import {
   getShippingCountries,
   type ShippingRegion,
@@ -37,6 +39,8 @@ export default function CartUI() {
 
   const [checkoutError, setCheckoutError] =
     useState("");
+
+  const [discountCode, setDiscountCode] = useState("");
 
   const [shippingRegion, setShippingRegion] =
     useState<ShippingRegion>("GB");
@@ -102,8 +106,8 @@ export default function CartUI() {
 
     setIsCheckingOut(true);
     setCheckoutError("");
-
     try {
+      const analyticsIdentity = await trackCommerceEvent("checkout_started");
       const response = await fetch(
         "/api/checkout",
         {
@@ -123,6 +127,9 @@ export default function CartUI() {
 
             shippingRegion,
             shippingCountry,
+            discountCode: discountCode.trim() || undefined,
+            analyticsVisitorId: analyticsIdentity?.visitorId,
+            analyticsSessionId: analyticsIdentity?.sessionId,
           }),
         }
       );
@@ -290,12 +297,10 @@ export default function CartUI() {
                           </button>
                         </div>
 
-                        <p className="cart-item-price">
-                          £
-                          {(
-                            itemTotal / 100
-                          ).toFixed(2)}
-                        </p>
+                        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 4 }}>
+                          <PriceDisplay price={item.product.price} originalPrice={item.product.originalPrice} align="right" />
+                          {item.quantity > 1 && <span className="cart-item-price">Line total: £{(itemTotal / 100).toFixed(2)}</span>}
+                        </div>
                       </div>
                     </div>
                   </article>
@@ -392,6 +397,11 @@ export default function CartUI() {
                   </select>
                 </div>
               )}
+
+              <div className="cart-shipping">
+                <label htmlFor="somsoa-discount-code" className="cart-shipping-label">DISCOUNT CODE</label>
+                <input id="somsoa-discount-code" className="cart-shipping-select" value={discountCode} onChange={(event) => setDiscountCode(event.target.value.toUpperCase())} placeholder="Enter discount code" disabled={isCheckingOut} />
+              </div>
 
               <div className="cart-shipping-note">
                 <strong>

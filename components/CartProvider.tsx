@@ -11,6 +11,7 @@ import {
 
 import type { ReactNode } from "react";
 import type { Product, SizeSystem } from "./products";
+import { trackCommerceEvent } from "@/lib/analytics-client";
 
 export type CartItem = {
   id: string;
@@ -48,32 +49,52 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [cartLoaded, setCartLoaded] = useState(false);
 
   useEffect(() => {
-    try {
-      const savedCart = localStorage.getItem("somsoa-cart");
-
-      if (savedCart) {
-        const parsedCart: unknown = JSON.parse(savedCart);
-
-        if (Array.isArray(parsedCart)) {
-          setItems(parsedCart);
-        }
+    let cancelled = false;
+    async function restoreCart() {
+      let saved: CartItem[] = [];
+      try {
+        const raw = localStorage.getItem("somsoa-cart");
+        const parsed: unknown = raw ? JSON.parse(raw) : [];
+        if (Array.isArray(parsed)) saved = parsed as CartItem[];
+      } catch {
+        localStorage.removeItem("somsoa-cart");
       }
-    } catch {
-      localStorage.removeItem("somsoa-cart");
-    } finally {
-      setCartLoaded(true);
+
+      if (cancelled) return;
+      setItems(saved);
+
+      // Refresh stored cart items from the current public catalogue so admin
+      // price/availability changes are reflected before the next checkout.
+      try {
+        const response = await fetch('/api/products', { cache: 'no-store' });
+        if (response.ok) {
+          const payload = await response.json();
+          if (Array.isArray(payload?.products)) {
+            const latest = new Map<string, Product>(payload.products.map((product: Product) => [product.id, product]));
+            if (!cancelled) {
+              setItems(saved
+                .filter((item) => latest.has(item.product.id))
+                .map((item) => ({ ...item, product: latest.get(item.product.id)! })));
+            }
+          }
+        }
+      } catch {
+        // Keep the saved cart visible; checkout independently validates prices.
+      } finally {
+        if (!cancelled) setCartLoaded(true);
+      }
     }
+    restoreCart();
+    return () => { cancelled = true; };
   }, []);
 
   useEffect(() => {
-    if (!cartLoaded) {
-      return;
-    }
-
+    if (!cartLoaded) return;
     localStorage.setItem("somsoa-cart", JSON.stringify(items));
   }, [items, cartLoaded]);
 
   const addItem = useCallback((item: AddToCartItem) => {
+    void trackCommerceEvent("add_to_cart", item.product.id);
     const itemId = `${item.product.id}-${item.sizeSystem}-${item.size}`;
 
     setItems((currentItems) => {

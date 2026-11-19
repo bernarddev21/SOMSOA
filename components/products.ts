@@ -4,7 +4,10 @@ export type Product = {
   id: string;
   name: string;
   colour: string;
+  /** Current selling price in pence (sale price when active). */
   price: number;
+  /** Genuine catalogue price before a sale, in pence. */
+  originalPrice?: number;
   image: string;
 };
 

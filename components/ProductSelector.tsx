@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import type { Product, SizeSystem } from "./products";
 import { SIZE_OPTIONS } from "./products";
 import { useCart } from "./CartProvider";
+import PriceDisplay from "./PriceDisplay";
 
 type ProductSelectorProps = {
   product: Product;
@@ -68,13 +69,23 @@ export default function ProductSelector({
       }
     };
 
-    const previousOverflow = document.body.style.overflow;
-
-    document.body.style.overflow = "hidden";
     document.addEventListener("keydown", handleKeyDown);
 
+    // On mobile, the overlay owns the vertical scroll. Locking the document
+    // body as well creates competing scroll containers, which Safari can snap
+    // back to while a customer is moving through the size options.
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    const previousOverflow = document.body.style.overflow;
+
+    if (!isMobile) {
+      document.body.style.overflow = "hidden";
+    }
+
     return () => {
-      document.body.style.overflow = previousOverflow;
+      if (!isMobile) {
+        document.body.style.overflow = previousOverflow;
+      }
+
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [isOpen]);
@@ -90,9 +101,7 @@ export default function ProductSelector({
             {product.colour}
           </span>
 
-          <span className="product-meta-price">
-            £{(product.price / 100).toFixed(2)}
-          </span>
+          <PriceDisplay price={product.price} originalPrice={product.originalPrice} align="right" />
 
         </div>
 
@@ -177,9 +186,7 @@ export default function ProductSelector({
                     </h3>
                   </div>
 
-                  <span className="product-drawer-price">
-                    £{(product.price / 100).toFixed(2)}
-                  </span>
+                  <PriceDisplay price={product.price} originalPrice={product.originalPrice} align="right" />
 
                 </div>
 

@@ -1,11 +1,14 @@
 import Image from "next/image";
 import CartButton from "../components/CartButton";
 import ProductSelector from "../components/ProductSelector";
-import { PRODUCTS } from "../components/products";
+import { getStoreProducts } from "../lib/products-server";
 import Newsletter from "../components/home/Newsletter";
 import CarouselControls from "../components/ui/CarouselControls";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const PRODUCTS = await getStoreProducts();
   return (
     <main id="top">
 
@@ -1169,6 +1172,11 @@ export default function Home() {
       ========================== */}
 
       <Newsletter />
+
+      {/* Discreet staff access, kept separate from customer navigation. */}
+      <div className="admin-access-footer">
+        <a href="/admin/login">Admin Login</a>
+      </div>
 
     </main>
   );
