@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import type { Product, SizeSystem } from "./products";
 import { SIZE_OPTIONS } from "./products";
 import { useCart } from "./CartProvider";
@@ -123,7 +124,7 @@ export default function ProductSelector({
 
 
       {/* Product selection drawer */}
-      {isOpen && (
+      {isOpen && createPortal(
         <div
           className="product-drawer-overlay"
           role="presentation"
@@ -342,7 +343,8 @@ export default function ProductSelector({
 
           </aside>
 
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
