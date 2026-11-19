@@ -4671,3 +4671,47 @@ button:focus-visible {
     flex: 0 0 auto;
   }
 }
+
+ 
+/* MOBILE COLLECTION REFINEMENT
+   Keep the product rail swipeable, but remove the separate pagination footer.
+   Product cards stay full-height and the next card remains subtly visible. */
+@media (max-width: 768px) {
+  #collection {
+    padding-bottom: 52px;
+  }
+
+  #collection .collection-grid {
+    display: flex;
+    gap: 12px;
+    width: calc(100% + 20px);
+    margin-right: -20px;
+    padding: 0 20px 4px 0;
+    overflow-x: auto;
+    overflow-y: visible;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  #collection .collection-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  #collection .collection-product {
+    flex: 0 0 86%;
+    min-width: 0;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  #collection .collection-card {
+    height: clamp(300px, 88vw, 390px);
+  }
+
+  #collection .collection-grid + .carousel-pagination {
+    display: none !important;
+  }
+}
