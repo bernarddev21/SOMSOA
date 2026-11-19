@@ -1,0 +1,181 @@
+.admin-shell{min-height:100vh;display:grid;grid-template-columns:245px 1fr;background:#f7f5ef;color:#201d19;font-family:Arial,sans-serif}.admin-sidebar{background:#201d19;color:#f7f5ef;padding:34px 22px;display:flex;flex-direction:column;gap:48px}.admin-brand{font-family:Georgia,serif;font-size:27px;letter-spacing:3px}.admin-brand span{display:block;font:9px Arial,sans-serif;letter-spacing:2px;margin-top:7px;color:#c9bda9}.admin-sidebar nav{display:grid;gap:8px}.admin-sidebar nav a{padding:12px 13px;border-radius:8px;color:#eee7db;font-size:14px}.admin-sidebar nav a:hover{background:#39342d}.admin-sidebar-note{margin-top:auto;color:#b7aa96;font-size:11px}.admin-main{padding:42px;max-width:1300px;width:100%;margin:0 auto}.admin-kicker{font-size:10px;letter-spacing:2px;color:#8b765b;text-transform:uppercase}.admin-title{font:42px Georgia,serif;margin:10px 0 8px}.admin-muted{color:#756f65;font-size:14px}.admin-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:28px 0}.admin-card{background:#fff;border:1px solid #e8e3d9;border-radius:12px;padding:20px}.admin-card small{display:block;color:#81796d;font-size:12px}.admin-card strong{display:block;font:30px Georgia,serif;margin-top:12px}.admin-panel{background:#fff;border:1px solid #e8e3d9;border-radius:12px;padding:22px;margin-top:18px}.admin-table{width:100%;border-collapse:collapse;font-size:13px}.admin-table th,.admin-table td{text-align:left;padding:13px 10px;border-bottom:1px solid #eee9e1}.admin-input{padding:11px 12px;border:1px solid #d8d0c3;border-radius:7px;background:#fff;max-width:100%}.admin-button{padding:11px 16px;background:#29251f;color:white;border:0;border-radius:7px;cursor:pointer}.admin-button:disabled{opacity:.5;cursor:wait}.admin-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.admin-error{color:#a33b2c;font-size:13px;margin-top:10px}.admin-success{color:#286b45;font-size:13px;margin-top:10px}@media(max-width:760px){.admin-shell{grid-template-columns:1fr}.admin-sidebar{padding:18px;gap:18px}.admin-sidebar nav{display:flex;overflow:auto}.admin-sidebar nav a{white-space:nowrap}.admin-sidebar-note{display:none}.admin-main{padding:24px 16px}.admin-title{font-size:34px}.admin-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.admin-panel{overflow:auto}}
+
+/* Ecommerce analytics dashboard */
+.admin-analytics-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap}.admin-period{display:flex;align-items:center;gap:9px;color:#756f65;font-size:13px}.admin-analytics-grid .admin-card strong{font-size:27px}.admin-analytics-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.admin-analytics-columns .admin-panel{min-width:0}.admin-analytics-columns h2{font:25px Georgia,serif;margin:0 0 9px}.admin-funnel-row,.admin-source-row{margin-top:19px}.admin-funnel-label,.admin-source-row>div:first-child{display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:13px;margin-bottom:8px}.admin-funnel-label strong{font-size:13px}.admin-funnel-label small{color:#8b765b;font-weight:400;margin-left:7px}.admin-bar-track{height:8px;border-radius:20px;background:#eeeae2;overflow:hidden}.admin-bar-fill{height:100%;border-radius:20px;background:#8b765b;min-width:0}.admin-footnote,.admin-analytics-disclaimer{font-size:12px;line-height:1.6;margin-top:18px}.admin-revenue-chart{display:flex;align-items:stretch;gap:9px;height:220px;padding-top:20px;overflow-x:auto}.admin-revenue-column{flex:1;min-width:42px;display:flex;flex-direction:column;align-items:center;gap:7px}.admin-revenue-column>strong{font-size:9px;font-weight:500;color:#756f65;white-space:nowrap}.admin-revenue-bar-track{height:145px;width:100%;display:flex;align-items:flex-end;background:#f5f2ec;border-radius:5px 5px 0 0;overflow:hidden}.admin-revenue-bar{width:100%;background:#8b765b;border-radius:5px 5px 0 0;min-height:3px}.admin-revenue-column>small{font-size:10px;color:#756f65;white-space:nowrap}.admin-product-list{display:grid;gap:0}.admin-product-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid #eee9e1;font-size:13px}.admin-product-row:last-child{border-bottom:0}.admin-product-row>div{display:grid;gap:4px}.admin-product-row small{color:#81796d;font-size:11px}
+@media(max-width:900px){.admin-analytics-columns{grid-template-columns:1fr}}
+
+/* =====================================
+   SOMSOA ADMIN - MOBILE REDESIGN
+===================================== */
+
+/* Hidden on desktop */
+.admin-mobile-header {
+  display: none;
+}
+
+@media (max-width: 760px) {
+
+  /* Prevent horizontal overflow */
+  .admin-shell {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Hide desktop sidebar */
+  .admin-sidebar {
+    display: none;
+  }
+
+  /* Compact mobile header */
+  .admin-mobile-header {
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    min-height: 76px;
+    padding: 15px 20px;
+    align-items: center;
+    justify-content: space-between;
+    background: #201d19;
+    color: #f7f5ef;
+  }
+
+  .admin-mobile-header .admin-brand {
+    color: #f7f5ef;
+    font-size: 23px;
+  }
+
+  .admin-mobile-menu-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid #655b4d;
+    border-radius: 8px;
+    background: transparent;
+    color: #f7f5ef;
+    font-size: 23px;
+    cursor: pointer;
+  }
+
+  /* Dropdown navigation */
+  .admin-mobile-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: grid;
+    gap: 0;
+    padding: 10px 20px 18px;
+    background: #201d19;
+    border-top: 1px solid #39342d;
+    box-shadow: 0 12px 20px rgba(0,0,0,.15);
+  }
+
+  .admin-mobile-nav a {
+    display: block;
+    padding: 15px 5px;
+    color: #f7f5ef;
+    font-size: 14px;
+    border-bottom: 1px solid #39342d;
+  }
+
+  .admin-mobile-nav a:last-child {
+    border-bottom: 0;
+  }
+
+  /* Main dashboard */
+  .admin-main {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 25px 18px 40px;
+    box-sizing: border-box;
+  }
+
+  .admin-title {
+    font-size: 32px;
+    line-height: 1.15;
+  }
+
+  /* Dashboard cards */
+  .admin-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 11px;
+    margin: 22px 0;
+  }
+
+  .admin-card {
+    min-width: 0;
+    padding: 15px;
+  }
+
+  .admin-card strong {
+    font-size: 25px;
+    overflow-wrap: anywhere;
+  }
+
+  /* Panels and tables */
+  .admin-panel {
+    width: 100%;
+    min-width: 0;
+    padding: 16px;
+    box-sizing: border-box;
+    overflow-x: auto;
+  }
+
+  .admin-table {
+    min-width: 580px;
+  }
+
+  /* Forms and controls */
+  .admin-input {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .admin-row {
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .admin-row .admin-button {
+    min-height: 44px;
+  }
+
+  /* Analytics */
+  .admin-analytics-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-analytics-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-revenue-chart {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .admin-main {
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+
+  .admin-grid {
+    gap: 8px;
+  }
+
+  .admin-card {
+    padding: 12px;
+  }
+}
