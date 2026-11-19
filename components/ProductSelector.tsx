@@ -158,9 +158,10 @@ export default function ProductSelector({
                 type="button"
                 className="product-drawer-close"
                 onClick={closeSelector}
-                aria-label={`Close ${product.name} selection`}
+                aria-label="Back to collection"
               >
-                ×
+                <span aria-hidden="true">←</span>
+                <span className="product-drawer-back-label">Back to collection</span>
               </button>
 
             </div>
@@ -273,6 +274,13 @@ export default function ProductSelector({
                 </div>
 
 
+
+
+              </div>
+
+            </div>
+
+            <div className="product-drawer-purchase">
                 {/* Quantity */}
                 <div className="product-drawer-section">
 
@@ -330,9 +338,6 @@ export default function ProductSelector({
                     →
                   </span>
                 </button>
-
-              </div>
-
             </div>
 
           </aside>
